@@ -1,0 +1,111 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+  <div class="container-fluid">
+    <!-- Brand / Title -->
+    <a class="navbar-brand fw-bold" href="#">Employee Management</a>
+
+    <!-- Right side buttons -->
+    <div class="d-flex ms-auto">
+      <button class="btn btn-success me-2 d-flex align-items-center" type="button" (click)="add()">
+        <mat-icon class="me-1">person_add</mat-icon>
+        Add Employee
+      </button>
+      <button class="btn btn-outline-light d-flex align-items-center" type="button" (click)="logout()">
+        <mat-icon class="me-1">logout</mat-icon>
+        Logout
+      </button>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container mt-4">
+
+  <!-- Search -->
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search employees..."
+        [(ngModel)]="filterValue"
+        (keyup)="applyFilter()"
+      />
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="table-responsive">
+    <table class="table table-striped table-hover align-middle" mat-table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="fullname">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Full Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.fullname }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+        <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Phone</th>
+        <td mat-cell *matCellDef="let element">{{ element.phone }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="designation">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Designation</th>
+        <td mat-cell *matCellDef="let element">{{ element.designation }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="department">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Department</th>
+        <td mat-cell *matCellDef="let element">{{ element.department }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="salary">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Salary</th>
+        <td mat-cell *matCellDef="let element">{{ element.salary }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="dateofjoining">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Date of Joining</th>
+        <td mat-cell *matCellDef="let element">{{ element.dateofjoining | date:'mediumDate' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let element">
+          <span class="badge" [ngClass]="{'bg-success': element.status==='Active','bg-danger': element.status==='Inactive'}">
+            {{ element.status }}
+          </span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="address">
+        <th mat-header-cell *matHeaderCellDef>Address</th>
+        <td mat-cell *matCellDef="let element">{{ element.address }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let element">
+          <button class="btn btn-sm btn-outline-primary me-1" (click)="onButtonClick(element.id)">
+            <mat-icon>visibility</mat-icon>
+          </button>
+          <button class="btn btn-sm btn-outline-success me-1" (click)="edit(element.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button class="btn btn-sm btn-outline-danger" (click)="delete(element.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <!-- Paginator -->
+  <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

@@ -1,0 +1,51 @@
+.signup-wrapper {
+  background: linear-gradient(135deg, #6dd5fa, #ffffff);
+  font-family: 'Poppins', sans-serif;
+}
+
+.signup-card {
+  width: 420px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 15px;
+  background: #fff;
+}
+
+.signup-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+  border-radius: 15px 15px 0 0 !important;
+  background: linear-gradient(135deg, #007bff, #00c6ff);
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+button[mat-raised-button] {
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+button[mat-raised-button]:hover {
+  background-color: #0069d9;
+  transform: scale(1.02);
+}
+
+button[mat-stroked-button]:hover {
+  border-color: #ff4d4d;
+  color: #ff4d4d;
+  transform: scale(1.02);
+}
+
+.card-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Bootstrap Icon size */
+.bi {
+  margin-right: 6px;
+  vertical-align: middle;
+}

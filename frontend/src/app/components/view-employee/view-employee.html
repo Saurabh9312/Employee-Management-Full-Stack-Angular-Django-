@@ -1,0 +1,68 @@
+<div class="employee-wrapper">
+  <div class="card view-card shadow-lg">
+    <!-- Header -->
+    <div class="card-header header-toolbar d-flex align-items-center">
+      <i class="bi bi-people-fill me-2"></i> Employee Details
+    </div>
+
+    <!-- Details Body -->
+    <div class="card-body">
+      <div class="row g-3 detail-grid">
+        <div class="col-md-6 detail-item">
+          <span class="label">Full Name:</span>
+          <span class="value">{{detailArray.fullname}}</span>
+        </div>
+
+        <div class="col-md-6 detail-item">
+          <span class="label">Email:</span>
+          <span class="value">{{detailArray.email}}</span>
+        </div>
+
+        <div class="col-md-6 detail-item">
+          <span class="label">Phone:</span>
+          <span class="value">{{detailArray.phone}}</span>
+        </div>
+
+        <div class="col-md-6 detail-item">
+          <span class="label">Designation:</span>
+          <span class="value">{{detailArray.designation}}</span>
+        </div>
+
+        <div class="col-md-6 detail-item">
+          <span class="label">Department:</span>
+          <span class="value">{{detailArray.department}}</span>
+        </div>
+
+        <div class="col-md-6 detail-item">
+          <span class="label">Salary:</span>
+          <span class="value">{{detailArray.salary}}</span>
+        </div>
+
+        <div class="col-md-6 detail-item">
+          <span class="label">Date of Joining:</span>
+          <span class="value">{{detailArray.dateofjoining | date:'mediumDate'}}</span>
+        </div>
+
+        <div class="col-md-6 detail-item">
+          <span class="label">Status:</span>
+          <span class="value badge" 
+                [ngClass]="{'bg-success': detailArray.status==='Active', 'bg-danger': detailArray.status==='Inactive'}">
+            {{detailArray.status}}
+          </span>
+        </div>
+
+        <div class="col-12 detail-item address">
+          <span class="label">Address:</span>
+          <span class="value">{{detailArray.address}}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="card-footer text-end">
+      <button type="button" class="btn btn-primary" routerLink="/list">
+        <i class="bi bi-arrow-left-circle"></i> Back
+      </button>
+    </div>
+  </div>
+</div>

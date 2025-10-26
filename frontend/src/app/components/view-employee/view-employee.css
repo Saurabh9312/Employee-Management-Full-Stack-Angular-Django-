@@ -1,0 +1,61 @@
+.employee-wrapper {
+  font-family: 'Poppins', sans-serif;
+  background: #f5f7fa;
+  min-height: 100vh;
+  padding: 40px 20px;
+}
+
+.view-card {
+  max-width: 900px;
+  margin: auto;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.view-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+}
+
+.header-toolbar {
+  background: linear-gradient(135deg, #0069d9, #00b4db);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 0;
+}
+
+.detail-grid {
+  margin-top: 10px;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-item .label {
+  font-weight: 500;
+  color: #555;
+}
+
+.detail-item .value {
+  font-weight: 600;
+  color: #333;
+  margin-top: 2px;
+}
+
+.address .value {
+  white-space: pre-wrap;
+}
+
+.badge {
+  font-weight: 500;
+  padding: 0.3em 0.7em;
+  border-radius: 12px;
+  text-transform: uppercase;
+}
+
+.card-footer {
+  background: transparent;
+  border-top: none;
+}

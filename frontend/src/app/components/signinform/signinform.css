@@ -1,0 +1,55 @@
+.login-wrapper {
+  background: linear-gradient(135deg, #007bff, #00c6ff);
+  font-family: 'Poppins', sans-serif;
+}
+
+.login-card {
+  width: 400px;
+  border-radius: 15px;
+  background: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+  border-radius: 15px 15px 0 0 !important;
+  background: linear-gradient(135deg, #0069d9, #00b4db);
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+button[mat-raised-button] {
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+button[mat-raised-button]:hover {
+  background-color: #0056b3;
+  transform: scale(1.02);
+}
+
+.card-footer a:hover {
+  text-decoration: underline;
+}
+
+.bi {
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* Snackbar feedback colors */
+.snack-success {
+  background-color: #28a745 !important;
+  color: white !important;
+}
+
+.snack-error {
+  background-color: #dc3545 !important;
+  color: white !important;
+}

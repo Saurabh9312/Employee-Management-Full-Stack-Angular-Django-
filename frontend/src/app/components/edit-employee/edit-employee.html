@@ -1,0 +1,118 @@
+<div class="employee-wrapper">
+  <div class="card form-card shadow-lg">
+    <!-- Header -->
+    <div class="card-header header-toolbar d-flex align-items-center">
+      <i class="bi bi-pencil-square me-2"></i> Edit Employee
+      <span class="spacer"></span>
+    </div>
+
+    <!-- Form Body -->
+    <div class="card-body">
+      <form [formGroup]="editForm" (ngSubmit)="onSubmit()" novalidate>
+
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="fullname" class="form-label">Full Name</label>
+            <input type="text" id="fullname" class="form-control" formControlName="fullname">
+            <div *ngIf="editForm.get('fullname')?.invalid && editForm.get('fullname')?.touched" class="text-danger">
+              Full Name is required
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" class="form-control" formControlName="email">
+            <div *ngIf="editForm.get('email')?.invalid && editForm.get('email')?.touched" class="text-danger">
+              Enter a valid email
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="phone" class="form-label">Phone</label>
+            <input type="text" id="phone" class="form-control" formControlName="phone">
+            <div *ngIf="editForm.get('phone')?.invalid && editForm.get('phone')?.touched" class="text-danger">
+              Phone is required
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="designation" class="form-label">Designation</label>
+            <select id="designation" class="form-select" formControlName="designation">
+              <option value="">Select Designation</option>
+              <option value="Manager">Manager</option>
+              <option value="Developer">Developer</option>
+              <option value="Tester">Tester</option>
+            </select>
+            <div *ngIf="editForm.get('designation')?.invalid && editForm.get('designation')?.touched" class="text-danger">
+              Designation is required
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="department" class="form-label">Department</label>
+            <select id="department" class="form-select" formControlName="department">
+              <option value="">Select Department</option>
+              <option value="MS">MS</option>
+              <option value="NonMS">NonMS</option>
+            </select>
+            <div *ngIf="editForm.get('department')?.invalid && editForm.get('department')?.touched" class="text-danger">
+              Department is required
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="salary" class="form-label">Salary</label>
+            <input type="number" min="0" id="salary" class="form-control" formControlName="salary">
+            <div *ngIf="editForm.get('salary')?.invalid && editForm.get('salary')?.touched" class="text-danger">
+              Salary is required and must be ≥ 0
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="dateofjoining" class="form-label">Date of Joining</label>
+            <input type="date" id="dateofjoining" class="form-control" formControlName="dateofjoining">
+            <div *ngIf="editForm.get('dateofjoining')?.invalid && editForm.get('dateofjoining')?.touched" class="text-danger">
+              Date of Joining is required
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="status" class="form-label">Status</label>
+            <select id="status" class="form-select" formControlName="status">
+              <option value="">Select Status</option>
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+            <div *ngIf="editForm.get('status')?.invalid && editForm.get('status')?.touched" class="text-danger">
+              Status is required
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="address" class="form-label">Address</label>
+          <textarea id="address" class="form-control" rows="3" formControlName="address"></textarea>
+          <div *ngIf="editForm.get('address')?.invalid && editForm.get('address')?.touched" class="text-danger">
+            Address is required
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2">
+          <button type="submit" class="btn btn-primary" [disabled]="!editForm.valid">
+            <i class="bi bi-save"></i> Update
+          </button>
+          <button type="button" class="btn btn-warning" routerLink="/list">
+            <i class="bi bi-x-circle"></i> Cancel
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
