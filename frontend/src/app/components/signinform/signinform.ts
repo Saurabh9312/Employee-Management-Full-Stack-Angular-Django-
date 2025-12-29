@@ -50,13 +50,8 @@ export class Signinform {
           panelClass: ['snack-success'],
         });
 
-        // Optional: save token if remember me is checked
-        if (this.rememberMe && res?.token) {
-          localStorage.setItem('authToken', res.token);
-          localStorage.setItem('userRole', res?.role);
-        }
-
-        setTimeout(() => this.router.navigate(['/list']), 2000);
+        // Navigate immediately after successful login
+        this.router.navigate(['/list']);
       },
       error: (err) => {
         console.error('Login failed', err);

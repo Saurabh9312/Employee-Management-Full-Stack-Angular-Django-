@@ -11,6 +11,11 @@
 npm-debug.log
 yarn-error.log
 
+# Environment files
+# Note: Don't add environment files to git
+environments/*.ts
+!environments/environment.prod.ts
+
 # IDEs and editors
 .idea/
 .project

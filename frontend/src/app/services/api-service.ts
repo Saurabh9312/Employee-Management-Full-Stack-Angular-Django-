@@ -1,14 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-   private apiurl = 'http://localhost:8000/api';
+   private apiurl = environment.apiUrl;
    private roleKey = 'userRole';
 
   constructor(@Inject(HttpClient) private http: HttpClient,  private router: Router) { }
@@ -22,7 +23,7 @@ export class ApiService {
   addEmployee(data: any): Observable<any> {
     return this.http.post(this.apiurl + '/add/', data);
   }
- editEmployee(data: any, id: any): Observable<any> {
+  editEmployee(data: any, id: any): Observable<any> {
     return this.http.put(this.apiurl + '/update/' + id , data);
   }
   deleteEmployee(id: any): Observable<any> {
@@ -34,12 +35,22 @@ export class ApiService {
   }
 
   login(data: any): Observable<any> {
-    return this.http.post(this.apiurl + '/login/', data);
+    return this.http.post(this.apiurl + '/login/', data).pipe(
+      tap((res: any) => {
+        // Store JWT access token and role in localStorage
+        if (res?.access) {
+          localStorage.setItem('token', res.access);
+        }
+        if (res?.role) {
+          localStorage.setItem('userRole', res.role); // Changed from 'role' to 'userRole' to match the auth guard
+        }
+      })
+    );
   }
 
   logout() {
     localStorage.removeItem('token');
-    localStorage.removeItem('role');
+    localStorage.removeItem('userRole'); // Changed from 'role' to 'userRole'
     this.router.navigate(['/login']);
   }
 
