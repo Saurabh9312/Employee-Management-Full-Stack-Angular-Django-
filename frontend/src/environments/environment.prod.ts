@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://your-deployment-url/api' // This will be replaced with the actual production API URL
+  apiUrl: 'https://employee-management-full-stack-angular-3eod.onrender.com/api' // Production API URL
 };

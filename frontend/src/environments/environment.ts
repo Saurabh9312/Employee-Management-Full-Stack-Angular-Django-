@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8000/api'
+  apiUrl: 'https://employee-management-full-stack-angular-3eod.onrender.com/api' // Production API URL for default
 };
