@@ -9,7 +9,9 @@ urlpatterns = [
    path('update/<int:pk>', api_views.ListDetail.as_view()),
    path('delete/<int:pk>', api_views.ListDetail.as_view()),
 
-
-    path('signup/', api_views.SignupView.as_view(), name='signup'),
-    path('login/', api_views.LoginView.as_view(), name='login'),
+   path('signup/', api_views.SignupView.as_view(), name='signup'),
+   path('login/', api_views.LoginView.as_view(), name='login'),
+   
+   # Health check endpoint to keep backend alive
+   path('health-check/', api_views.health_check, name='health_check'),
 ]

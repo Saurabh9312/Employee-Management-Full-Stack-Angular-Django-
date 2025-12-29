@@ -93,3 +93,19 @@ def get_tokens_for_user(user):
         'access': str(refresh.access_token),
         'role': user.profile.role
     }
+
+# Health check endpoint to keep the backend alive
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+import datetime
+
+@api_view(['GET'])
+def health_check(request):
+    """
+    Health check endpoint to keep the backend alive
+    """
+    return Response({
+        'status': 'healthy',
+        'timestamp': datetime.datetime.now().isoformat(),
+        'message': 'Backend is running'
+    })
