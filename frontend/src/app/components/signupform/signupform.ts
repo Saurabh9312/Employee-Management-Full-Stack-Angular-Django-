@@ -60,7 +60,7 @@ export class Signupform implements OnInit {
 
     const formData = this.signupForm.value;
 
-    this.http.post('http://127.0.0.1:8000/api/signup/', formData).subscribe({
+    this.http.post('https://employee-management-full-stack-angular-3eod.onrender.com/api/signup/', formData).subscribe({
       next: (res) => {
         this.snackBar.open('Signup successful! Redirecting...', 'Close', {
           duration: 2500,

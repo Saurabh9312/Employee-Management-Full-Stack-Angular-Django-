@@ -67,7 +67,7 @@ export class AddEmployee implements OnInit {
 
     const formData = this.commonForm.value;
 
-    this.http.post('http://127.0.0.1:8000/api/add/', formData).subscribe({
+    this.http.post('https://employee-management-full-stack-angular-3eod.onrender.com/api/add/', formData).subscribe({
       next: () => {
         alert('Employee added successfully!');
         this.commonForm.reset();
