@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.views import APIView
 from .models import Employee, CustomUser
 from rest_framework import serializers
@@ -9,6 +9,21 @@ from .serializers import commonSerializer, UserSerializer
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.permissions import BasePermission
+
+
+class IsAdminUser(BasePermission):
+    """
+    Custom permission to only allow admin users to perform certain actions.
+    """
+    def has_permission(self, request, view):
+        # Check if user is authenticated first
+        if not request.user or not request.user.is_authenticated:
+            return False
+        
+        # Check if user has admin role
+        return hasattr(request.user, 'role') and request.user.role == 'admin'
+
 
 class List(APIView):
     def get(self, request):
@@ -17,11 +32,20 @@ class List(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     def post(self, request):
+        # Only admins can create employees
+        try:
+            if not (hasattr(request, 'user') and request.user.is_authenticated and 
+                    hasattr(request.user, 'role') and request.user.role == 'admin'):
+                return Response({'error': 'Only admin users can add employees'}, status=status.HTTP_403_FORBIDDEN)
+        except AttributeError:
+            return Response({'error': 'Authentication required'}, status=status.HTTP_403_FORBIDDEN)
+        
         serializer = commonSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class ListDetail(APIView):
     def get(self, request, pk):
@@ -31,6 +55,14 @@ class ListDetail(APIView):
     
 
     def put(self, request, pk):
+        # Only admins can edit employees
+        try:
+            if not (hasattr(request, 'user') and request.user.is_authenticated and 
+                    hasattr(request.user, 'role') and request.user.role == 'admin'):
+                return Response({'error': 'Only admin users can edit employees'}, status=status.HTTP_403_FORBIDDEN)
+        except AttributeError:
+            return Response({'error': 'Authentication required'}, status=status.HTTP_403_FORBIDDEN)
+        
         employee = Employee.objects.get(pk=pk)
         serializer = commonSerializer(employee, data=request.data, partial=True)
         if serializer.is_valid():
@@ -39,11 +71,27 @@ class ListDetail(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
+        # Only admins can delete employees
+        try:
+            if not (hasattr(request, 'user') and request.user.is_authenticated and 
+                    hasattr(request.user, 'role') and request.user.role == 'admin'):
+                return Response({'error': 'Only admin users can delete employees'}, status=status.HTTP_403_FORBIDDEN)
+        except AttributeError:
+            return Response({'error': 'Authentication required'}, status=status.HTTP_403_FORBIDDEN)
+        
         employee = Employee.objects.get(pk=pk)
         employee.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
     def patch(self, request, pk):
+        # Only admins can update employees
+        try:
+            if not (hasattr(request, 'user') and request.user.is_authenticated and 
+                    hasattr(request.user, 'role') and request.user.role == 'admin'):
+                return Response({'error': 'Only admin users can update employees'}, status=status.HTTP_403_FORBIDDEN)
+        except AttributeError:
+            return Response({'error': 'Authentication required'}, status=status.HTTP_403_FORBIDDEN)
+        
         employee = Employee.objects.get(pk=pk)
         serializer = commonSerializer(employee, data=request.data, partial=True)
         if serializer.is_valid():

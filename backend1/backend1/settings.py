@@ -96,6 +96,29 @@ REST_FRAMEWORK = {
 
 # JWT settings
 from datetime import timedelta
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
+
+
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        
+        # Add user role to the token
+        refresh = self.get_token(self.user)
+        data['access'] = str(refresh.access_token)
+        data['role'] = self.user.role  # Add role to response
+        
+        return data
+
+    def get_token(self, user):
+        token = super().get_token(user)
+        
+        # Add custom claims
+        token['role'] = user.role
+        
+        return token
+
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
