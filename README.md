@@ -1,6 +1,32 @@
 # Employee Management System
 
-A full-stack Employee Management application built with Angular and Django.
+## Environment Variables
+
+Create a `.env` file in the backend1 directory with the following variables:
+
+```
+# Django settings
+SECRET_KEY=your-super-secret-key-here-change-this-in-production
+DEBUG=False
+ENVIRONMENT=production
+ALLOWED_HOSTS=employee-management-full-stack-angular-3eod.onrender.com
+
+# CORS settings - adjust for your domain
+CORS_ALLOWED_ORIGINS=https://employee-management-full-stack-angular-q7go.onrender.com
+
+# Database (for production) - uncomment and configure when needed
+# DATABASE_URL=postgresql://user:password@localhost:5432/employee_management
+
+# Redis for session storage (optional)
+REDIS_URL=redis://localhost:6379/0
+
+# Security settings
+SECURE_SSL_REDIRECT=True
+SECURE_PROXY_SSL_HEADER=('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_HOST=True
+SESSION_COOKIE_SECURE=True
+CSRF_COOKIE_SECURE=True
+```
 
 ## Project Structure
 
@@ -16,7 +42,9 @@ A full-stack Employee Management application built with Angular and Django.
 
 ## Setup and Installation
 
-### Backend Setup
+### Backend Setup (Django)
+
+The backend API is available at `https://employee-management-full-stack-angular-3eod.onrender.com/api/` for production.
 
 1. Navigate to the backend directory:
    ```bash
@@ -61,7 +89,7 @@ A full-stack Employee Management application built with Angular and Django.
    python manage.py runserver
    ```
 
-### Frontend Setup
+### Frontend Setup (Angular)
 
 1. Navigate to the frontend directory:
    ```bash
@@ -146,7 +174,25 @@ For production deployment:
 4. Use environment-specific configurations
 5. Set up a reverse proxy (nginx/Apache) to serve static files
 
-## Running in Production
+## Running the Application
+
+### For Production Deployment:
+
+Backend (Django):
+```bash
+# From the backend1 directory
+gunicorn --bind 0.0.0.0:8000 --workers 3 backend1.wsgi:application &
+```
+
+Frontend (Angular):
+```bash
+# From the frontend directory
+npx serve -s dist/frontend/browser -l 4200 &
+```
+
+For the deployed application:
+- Backend: https://employee-management-full-stack-angular-3eod.onrender.com
+- Frontend: https://employee-management-full-stack-angular-q7go.onrender.com
 
 ### Backend (using Gunicorn)
 

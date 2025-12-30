@@ -38,6 +38,14 @@ export class EmployeeList implements OnInit, AfterViewInit {
     private router: Router
   ) { }
 
+  isSubAdmin(): boolean {
+    return this.api.isSubAdmin();
+  }
+
+  isAdmin(): boolean {
+    return this.api.isAdmin();
+  }
+
   ngOnInit() {
     this.api.getList().subscribe((res) => {
       const list = Array.isArray(res) ? res : res.data;

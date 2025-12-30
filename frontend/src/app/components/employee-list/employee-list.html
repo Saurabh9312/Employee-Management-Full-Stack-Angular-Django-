@@ -5,7 +5,7 @@
 
     <!-- Right side buttons -->
     <div class="d-flex ms-auto">
-      <button class="btn btn-success me-2 d-flex align-items-center" type="button" (click)="add()">
+      <button *ngIf="isAdmin()" class="btn btn-success me-2 d-flex align-items-center" type="button" (click)="add()">
         <mat-icon class="me-1">person_add</mat-icon>
         Add Employee
       </button>
@@ -92,10 +92,10 @@
           <button class="btn btn-sm btn-outline-primary me-1" (click)="onButtonClick(element.id)">
             <mat-icon>visibility</mat-icon>
           </button>
-          <button class="btn btn-sm btn-outline-success me-1" (click)="edit(element.id)">
+          <button *ngIf="isAdmin()" class="btn btn-sm btn-outline-success me-1" (click)="edit(element.id)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button class="btn btn-sm btn-outline-danger" (click)="delete(element.id)">
+          <button *ngIf="isAdmin()" class="btn btn-sm btn-outline-danger" (click)="delete(element.id)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>
