@@ -124,10 +124,17 @@ class LoginView(APIView):
             # Generate JWT tokens
             refresh = RefreshToken.for_user(user)
             
+            # Add role to the refresh token
+            refresh['role'] = getattr(user, 'role', 'user')
+            
+            # Also add role to access token by overriding default behavior
+            access = refresh.access_token
+            access['role'] = getattr(user, 'role', 'user')
+            
             return Response({
                 'refresh': str(refresh),
-                'access': str(refresh.access_token),
-                'role': getattr(user, 'role', 'user'),  # assuming role is an attribute of the user
+                'access': str(access),
+                'role': getattr(user, 'role', 'user'),
                 'username': user.username
             })
         else:
