@@ -1,0 +1,11 @@
+@if (showButton()) {
+<div class="install-prompt-container">
+    <div class="prompt-content">
+        <span class="prompt-text">Install App for better experience</span>
+    </div>
+    <div class="prompt-actions">
+        <button class="btn-cancel" (click)="showButton.set(false)">Dismiss</button>
+        <button class="btn-install" (click)="installPwa()">Install</button>
+    </div>
+</div>
+}

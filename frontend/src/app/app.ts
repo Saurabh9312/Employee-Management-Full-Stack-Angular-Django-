@@ -4,9 +4,11 @@ import { KeepaliveService } from './services/keepalive.service';
 import { isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID, Inject } from '@angular/core';
 
+import { InstallPromptComponent } from './components/install-prompt/install-prompt';
+
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, InstallPromptComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
