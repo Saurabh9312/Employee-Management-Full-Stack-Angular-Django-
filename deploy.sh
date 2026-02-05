@@ -43,7 +43,7 @@ setup_frontend() {
     # Install Node.js dependencies
     if [ -f "package.json" ]; then
         echo "Installing Node.js dependencies..."
-        npm install
+        npm install --legacy-peer-deps
     else
         echo "No package.json found in frontend"
     fi
